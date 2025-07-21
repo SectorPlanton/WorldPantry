@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Romanian Pantry</title>
+
+  <!-- Fonts: Cinzel pentru titluri, Caveat pentru accente -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Caveat&display=swap" rel="stylesheet" />
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+
+  <style>
+    body {
+      font-family: 'Caveat', cursive;
+      background: #f8f4eb;
+      color: #3b2e2e;
+      line-height: 1.6;
+      min-height: 100vh;
+      font-size: 2rem; /* text puțin mai mare */
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Cinzel', serif;
+      color: #a10000; /* rosu inchis */
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 6vw, 4.5rem); /* mai mare */
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color:#e9d6ad
+    }
+
+    h2 {
+      font-size: clamp(2.2rem, 4vw, 3rem); /* puțin mai mare */
+      margin-bottom: 1.5rem;
+    }
+
+    p, li, a {
+      font-size: 1.25rem; /* puțin mai mare */
+      color: #5a4a42;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: #fff3e6;
+      box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+    }
+    .navbar-brand {
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem; /* mai mare */
+      color: #a10000;
+      letter-spacing: 1.5px;
+      font-weight: 900;
+    }
+    .navbar-brand:hover {
+      color: #e03c3c;
+    }
+    .navbar-nav .nav-link {
+      color: #a10000;
+      font-weight: 600;
+      margin-right: 1rem;
+      font-size: 1.5rem; /* ușor mai mare */
+      transition: color 0.3s ease;
+    }
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link.active {
+      color: #e03c3c;
+    }
+
+    .navbar-toggler-icon {
+      filter: invert(20%) sepia(85%) saturate(300%) hue-rotate(345deg) brightness(90%);
+    }
+
+    @media (max-width: 991px) {
+      .navbar-collapse {
+        position: absolute;
+        top: 56px;
+        right: 0;
+        background: #fff3e6;
+        width: 220px;
+        border-radius: 0 0 0 10px;
+        box-shadow: 2px 2px 10px rgb(0 0 0 / 0.15);
+        padding: 1rem;
+        z-index: 1100;
+      }
+      .navbar-nav {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+
+    /* Hero Carousel */
+    .hero-carousel {
+      position: relative;
+      max-height: 600px;
+      overflow: hidden;
+      border-radius: 0 0 40px 40px;
+      box-shadow: 0 8px 20px rgb(0 0 0 / 0.3);
+    }
+    .hero-carousel .carousel-item img {
+      object-fit: cover;
+      height: 600px;
+      filter: brightness(0.7);
+      transition: filter 0.5s ease;
+    }
+
+    /* Text deasupra sliderului, mereu vizibil */
+    .hero-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 5;
+      text-align: center;
+      width: 90%;
+      max-width: 800px;
+      color: #fff;
+      text-shadow:
+        2px 2px 6px rgba(104, 103, 103, 0.596),
+        0 0 15px rgba(228, 162, 162, 0.7);
+    }
+
+    .hero-text h1 {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: clamp(3rem, 6vw, 4.5rem); /* mărit */
+      letter-spacing: 3px;
+      margin-bottom: 1rem;
+    }
+
+    .btn-custom {
+      font-weight: 700;
+      background: linear-gradient(45deg, #a10000, #e03c3c);
+      border: none;
+      padding: 0.9rem 2.5rem;
+      border-radius: 40px;
+      color: #fff;
+      box-shadow: 0 4px 10px rgba(161, 0, 0, 0.7);
+      transition: all 0.3s ease;
+      text-decoration: none;
+      font-size: 1.5rem;
+    }
+
+    .btn-custom:hover {
+      background: linear-gradient(45deg, #e03c3c, #a10000);
+      transform: scale(1.05);
+    }
+
+    section.section-spacing {
+      padding: 100px;
+    }
+
+    .explore-recipes-btn {
+      display: block;
+      margin: 3rem auto 0;
+      text-align: center;
+    }
+
+    /* Cards */
+    .card {
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgb(161 0 0 / 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card-title {
+      font-family: 'Cinzel', serif;
+      color: #a10000;
+      font-weight: 700;
+      font-size: 1.7rem;
+    }
+
+    .card-text {
+      color: #5a4a42;
+      font-size: 1.5rem;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #a10000;
+      color: #fff;
+    }
+
+    footer p {
+        color: #f8f4eb;
+    }
+
+    footer a {
+      color: #ffd700;
+      transition: color 0.3s ease;
+      font-size: 1.5rem;
+    }
+
+    footer a:hover {
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="#">Romanian Pantry</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav text-end">
+        <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Asian</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Turkish</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Recipes</a></li>
+        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-cart"></i></a></li>
+        <li class="nav-item"><a class="btn btn-custom btn-sm ms-2" href="#">Sign Up</a></li>
+        <li class="nav-item"><a class="btn btn-custom btn-sm ms-2" href="#">Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Carousel -->
+<div id="heroCarousel" class="carousel slide hero-carousel" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="../images/r1.png" class="d-block w-100" alt="Romanian Village">
+    </div>
+    <div class="carousel-item">
+      <img src="../images/r2.jpg" class="d-block w-100" alt="Traditional Food">
+    </div>
+    <div class="carousel-item">
+      <img src="../images/r3.png" class="d-block w-100" alt="Romanian Market">
+    </div>
+  </div>
+  <div class="hero-text">
+    <h1>Experience Flavors From Romania</h1>
+    <a href="#pantries" class="btn btn-custom mt-3">Explore Our Pantry</a>
+  </div>
+</div>
+
+<!-- Category Section -->
+<section id="categories" class="my-5">
+  <h2 class="text-center mb-4">Explore by Category</h2>
+  <div class="row justify-content-center g-4">
+
+    <!-- Drinks -->
+    <div class="col-md-4 col-lg-2">
+      <a href="#drinks" class="text-decoration-none">
+        <div class="card text-center h-100">
+          <img src="../images/borsec.png" class="card-img-top" alt="Drinks">
+          <div class="card-body">
+            <h3 class="card-title">Drinks</h3>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Snacks -->
+    <div class="col-md-4 col-lg-2">
+      <a href="#snacks" class="text-decoration-none">
+        <div class="card text-center h-100">
+          <img src="../images/pufuleti.jpg" class="card-img-top" alt="Snacks">
+          <div class="card-body">
+            <h3 class="card-title">Snacks</h3>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Vegan -->
+    <div class="col-md-4 col-lg-2">
+      <a href="#vegan" class="text-decoration-none">
+        <div class="card text-center h-100">
+          <img src="../images/zacusca.png" class="card-img-top" alt="Vegan">
+          <div class="card-body">
+            <h3 class="card-title">Vegan</h3>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Dairy & Meats -->
+    <div class="col-md-4 col-lg-2">
+      <a href="#dairy" class="text-decoration-none">
+        <div class="card text-center h-100">
+          <img src="../images/burduf.png" class="card-img-top" alt="Dairy and Meats">
+          <div class="card-body">
+            <h3 class="card-title">Dairy & Meats</h3>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Grains -->
+    <div class="col-md-4 col-lg-2">
+      <a href="#grains" class="text-decoration-none">
+        <div class="card text-center h-100">
+          <img src="../images/arpacas.png" class="card-img-top" alt="Grains">
+          <div class="card-body">
+            <h3 class="card-title">Grains</h3>
+          </div>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- Pantries Section (Best Seller Products) -->
+<section class="container section-spacing" id="pantries">
+  <div class="text-center mb-5">
+    <h2 class="fw-bold">Best Seller Products</h2>
+  </div>
+  <div class="row g-4">
+    <div class="col-md-3">
+      <div class="card h-100 shadow-sm">
+        <img src="../images/pufuleti.jpg" class="card-img-top rounded-top" alt="Pufuleti" />
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">Gusto Pufuleti</h5>
+          <p class="card-text">Corn Pufs.</p>
+          <p class="card-text">85$</p>
+          <p class="card-text fw-bold mt-auto">Price: 2.99 $</p>
+          <button class="btn btn-custom w-100">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card h-100 shadow-sm">
+        <img src="../images/zacusca.png" class="card-img-top rounded-top" alt="zacusca" />
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">Zacusca Vegetala</h5>
+          <p class="card-text">Traditional Vegetables Spred.</p>
+          <p class="card-text fw-bold mt-auto">Price: 7.99$</p>
+          <button class="btn btn-custom w-100">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card h-100 shadow-sm">
+        <img src="../images/socata.png" class="card-img-top rounded-top" alt="socata" />
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">Biborteni Socata</h5>
+          <p class="card-text">Traditional Eldebrberry Carbonated Drink.</p>
+          <p class="card-text fw-bold mt-auto">Price: 4.99$</p>
+          <button class="btn btn-custom w-100">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card h-100 shadow-sm">
+        <img src="../images/magiun.png" class="card-img-top rounded-top" alt="Magiun de prune" />
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">Magiun de Prune</h5>
+          <p class="card-text">Natural plum jam, traditional Romanian sweetness.</p>
+          <p class="card-text fw-bold mt-auto">Price: 30 RON</p>
+          <button class="btn btn-custom w-100">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+ <!-- Gallery: 2 big cards with traditional Romanian recipes -->
+  <section id="gallery" class="my-5">
+    <h2 class="text-center mb-4">Traditional Romanian Recipes</h2>
+    <div class="row justify-content-center g-4">
+
+      <!-- Card 1 -->
+      <div class="col-md-6">
+        <div class="card">
+          <img src="../images/sarmale.jpg" class="card-img-top" alt="Sarmale">
+          <div class="card-body text-center">
+            <h3 class="card-title">Sarmale</h3>
+            <p class="card-text">Traditional Romanian cabbage rolls stuffed with pork and rice.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="col-md-6">
+        <div class="card">
+          <img src="../images/ciorba.jpg" class="card-img-top" alt="Ciorba de Vacuta">
+          <div class="card-body text-center">
+            <h3 class="card-title">Ciorba de Vacuta</h3>
+            <p class="card-text">Romanian polenta served with cheese, sour cream, and meats.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+<!-- Newsletter Section -->
+<section class="bg-light py-5">
+  <div class="container text-center">
+    <h2>Subscribe to our Newsletter</h2>
+    <p>Stay updated with the latest Romanian recipes and pantry products.</p>
+    <form class="row justify-content-center g-2">
+      <div class="col-auto">
+        <input type="email" class="form-control" placeholder="Your email" required />
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-custom">Subscribe</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-4 text-center">
+  <div class="container">
+    <p>© 2025 Romanian Pantry. All rights reserved.</p>
+    <p>
+      Follow us:
+      <a href="#"><i class="bi bi-facebook"></i></a> &nbsp;
+      <a href="#"><i class="bi bi-instagram"></i></a> &nbsp;
+      <a href="#"><i class="bi bi-twitter"></i></a>
+    </p>
+  </div>
+</footer>
+
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
