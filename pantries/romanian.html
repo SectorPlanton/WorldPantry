@@ -82,6 +82,63 @@
       filter: invert(20%) sepia(85%) saturate(300%) hue-rotate(345deg) brightness(90%);
     }
 
+    /* Ajustare font global */
+body {
+  font-size: clamp(1rem, 2vw, 1.25rem); /* mic pe mobile, normal pe desktop */
+}
+
+/* Titluri mai flexibile */
+h1 {
+  font-size: clamp(2rem, 6vw, 4.5rem);
+}
+h2 {
+  font-size: clamp(1.5rem, 4vw, 3rem);
+}
+.card-title {
+  font-size: clamp(1.2rem, 3vw, 1.7rem);
+}
+.card-text, footer a {
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+/* Hero Carousel adaptabil */
+.hero-carousel .carousel-item img {
+  height: clamp(250px, 60vh, 600px); /* pe mobile scade, pe desktop rămâne mare */
+}
+
+/* Padding secțiuni */
+section.section-spacing {
+  padding: clamp(2rem, 6vw, 100px);
+}
+
+/* Newsletter input pe mobil */
+@media (max-width: 576px) {
+  .newsletter form .col-auto {
+    width: 100%;
+  }
+  .newsletter input {
+    width: 100%;
+  }
+  .newsletter button {
+    width: 100%;
+  }
+}
+
+/* Navbar pe telefoane mici */
+@media (max-width: 576px) {
+  .navbar-brand {
+    font-size: 1.5rem;
+  }
+  .navbar-nav .nav-link {
+    font-size: 1.2rem;
+  }
+  .btn-custom {
+    font-size: 1.2rem;
+    padding: 0.6rem 1.5rem;
+  }
+}
+
+
     @media (max-width: 991px) {
       .navbar-collapse {
         position: absolute;
@@ -216,7 +273,6 @@
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
-  <div class="container">
     <a class="navbar-brand fw-bold" href="#">Romanian Pantry</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
@@ -232,9 +288,8 @@
         <li class="nav-item"><a class="btn btn-custom btn-sm ms-2" href="#">Login</a></li>
       </ul>
     </div>
-  </div>
 </nav>
-
+<div class = "container">
 <!-- Hero Carousel -->
 <div id="heroCarousel" class="carousel slide hero-carousel" data-bs-ride="carousel">
   <div class="carousel-inner">
@@ -329,21 +384,20 @@
     <h2 class="fw-bold">Best Seller Products</h2>
   </div>
   <div class="row g-4">
-    <div class="col-md-3">
-      <div class="card h-100 shadow-sm">
+    <div class="col-md-6">
+      <div class="card h-150 shadow-sm">
         <img src="../images/pufuleti.jpg" class="card-img-top rounded-top" alt="Pufuleti" />
         <div class="card-body d-flex flex-column">
           <h5 class="card-title">Gusto Pufuleti</h5>
           <p class="card-text">Corn Pufs.</p>
-          <p class="card-text">85$</p>
           <p class="card-text fw-bold mt-auto">Price: 2.99 $</p>
           <button class="btn btn-custom w-100">Add to Cart</button>
         </div>
       </div>
     </div>
 
-    <div class="col-md-3">
-      <div class="card h-100 shadow-sm">
+    <div class="col-md-6">
+      <div class="card h-400 shadow-sm">
         <img src="../images/zacusca.png" class="card-img-top rounded-top" alt="zacusca" />
         <div class="card-body d-flex flex-column">
           <h5 class="card-title">Zacusca Vegetala</h5>
@@ -354,8 +408,8 @@
       </div>
     </div>
 
-    <div class="col-md-3">
-      <div class="card h-100 shadow-sm">
+    <div class="col-md-6">
+      <div class="card h-150 shadow-sm">
         <img src="../images/socata.png" class="card-img-top rounded-top" alt="socata" />
         <div class="card-body d-flex flex-column">
           <h5 class="card-title">Biborteni Socata</h5>
@@ -366,8 +420,8 @@
       </div>
     </div>
 
-    <div class="col-md-3">
-      <div class="card h-100 shadow-sm">
+    <div class="col-md-6">
+      <div class="card h-150 shadow-sm">
         <img src="../images/magiun.png" class="card-img-top rounded-top" alt="Magiun de prune" />
         <div class="card-body d-flex flex-column">
           <h5 class="card-title">Magiun de Prune</h5>
@@ -403,7 +457,7 @@
           <img src="../images/ciorba.jpg" class="card-img-top" alt="Ciorba de Vacuta">
           <div class="card-body text-center">
             <h3 class="card-title">Ciorba de Vacuta</h3>
-            <p class="card-text">Traditional Romanian Veal Sour Soup</p>
+            <p class="card-text">Romanian beef soup served with sourcream.</p>
           </div>
         </div>
       </div>
@@ -426,6 +480,7 @@
     </form>
   </div>
 </section>
+</div>
 
 <!-- Footer -->
 <footer class="py-4 text-center">
